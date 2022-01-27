@@ -1,0 +1,26 @@
+<annotation>
+	<folder>collectedImages</folder>
+	<filename>o.a7000b1c-1c78-11ec-91f2-207918a8bcda.jpg</filename>
+	<path>E:\SEM VII\Final Year Project\RealTimeObjectDetection\Tensorflow\workspace\images\collectedImages\o.a7000b1c-1c78-11ec-91f2-207918a8bcda.jpg</path>
+	<source>
+		<database>Unknown</database>
+	</source>
+	<size>
+		<width>640</width>
+		<height>480</height>
+		<depth>3</depth>
+	</size>
+	<segmented>0</segmented>
+	<object>
+		<name>o</name>
+		<pose>Unspecified</pose>
+		<truncated>0</truncated>
+		<difficult>0</difficult>
+		<bndbox>
+			<xmin>180</xmin>
+			<ymin>243</ymin>
+			<xmax>433</xmax>
+			<ymax>473</ymax>
+		</bndbox>
+	</object>
+</annotation>

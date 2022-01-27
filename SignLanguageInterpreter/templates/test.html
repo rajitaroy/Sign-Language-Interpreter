@@ -1,0 +1,289 @@
+{% load static %}
+{% block content %}
+
+
+<!DOCTYPE html>
+<html>
+<head lang="en">
+<meta charset="UTF-8">
+<title>Picture Quiz</title>
+<style>
+body {
+background-color: #3d3d3d;
+}
+.grid {
+width: 68%;
+height: 520px;
+margin: 0 auto;
+background-color: #eeee;
+padding: 10px 50px 50px 50px;
+border-radius: 50px;
+border: 2px solid #cbcbcb;
+box-shadow: 10px 15px 5px #cbcbcb;
+}
+
+.buttons img
+{
+width:200px;
+}
+.grid h1 {
+font-family: "sans-serif";
+background-color: crimson;
+font-size: 35px;
+text-align: center;
+color: #ffffff;
+padding: 2px 0px;
+border-radius: 50px;
+}
+hr
+{
+margin-top: 50px;
+    color: red;
+    background-color: crimson;
+    height: 2px;
+    border: none;
+}
+#score {
+color: black;
+text-align: center;
+font-size: 30px;
+}
+
+.grid #question {
+font-family: "monospace";
+font-size: 30px;
+color: black;
+}
+
+.buttons {
+margin-top: 30px;
+}
+
+#btn0,
+#btn1,
+#btn2,
+#btn3 {
+
+    padding: 0px;
+font-size: 20px;
+color: #fff;
+    border: none;
+margin: 10px 20px 10px 0px;
+
+}
+
+#btn0:hover,
+#btn1:hover,
+#btn2:hover,
+#btn3:hover {
+cursor: pointer;
+background-color: #ffc107;
+}
+
+#btn0:focus,
+#btn1:focus,
+#btn2:focus,
+#btn3:focus {
+outline: 0;
+}
+
+#progress {
+color: #2b2b2b;
+font-size: 18px;
+}
+
+</style>
+</head>
+<body>
+<div class="grid">
+<div id="quiz">
+<h1>ISL Quiz</h1>
+<hr style="margin-bottom: 20px">
+<p id="question"></p>
+<div class="buttons">
+<button id="btn0"><span id="choice0"></span></button>
+<button id="btn1"><span id="choice1"></span></button>
+<button id="btn2"><span id="choice2"></span></button>
+<button id="btn3"><span id="choice3"></span></button>
+</div>
+<hr style="margin-top: 50px">
+<footer>
+<p id="progress">Question x of y</p>
+</footer>
+</div>
+</div>
+<script type="text/javascript">
+var images = {
+"A"  : "A.jpg",
+"B" : "B.jpg",
+"C" : "C.jpg",
+"D"   : "D.jpg",
+"E"   : "E.jpg",
+"F"   : "F.jpg",
+"G"   : "G.jpg",
+"H"   : "H.jpg",
+"I"   : "I.jpg",
+"J"   : "J.jpg",
+"K"   : "K.jpg",
+"L"   : "L.jpg",
+"M"   : "M.jpg",
+"N"   : "N.jpg",
+"O"   : "O.jpg",
+"P"   : "P.jpg",
+"Q"   : "Q.jpg",
+"R"   : "R.jpg",
+"S"   : "S.jpg",
+"T"   : "T.jpg",
+"U"   : "U.jpg",
+"V"   : "V.jpg",
+"W"   : "W.jpg",
+"X"   : "X.jpg",
+"Y"   : "Y.jpg",
+"Z"   : "Z.jpg"
+}  
+function populate() {
+if (quiz.isEnded()) {
+showScores();
+} else {
+// show question
+var element = document.getElementById("question");
+element.innerHTML = quiz.getQuestionIndex().text;
+
+// show options
+var choices = quiz.getQuestionIndex().choices;
+for (var i = 0; i < choices.length; i++) {
+var element = document.getElementById("choice" + i);
+console.log(choices[i]);
+console.log(images[choices[i]]);
+var pic = images[choices[i]];
+console.log(pic);
+element.innerHTML = images[choices[i]]? "<img src='{% static '" + pic + "' %}' alt='img' style='width:100%' />":choices[i];
+guess("btn" + i, choices[i]);
+}
+
+showProgress();
+}
+};
+
+function guess(id, guess) {
+var button = document.getElementById(id);
+button.onclick = function() {
+quiz.guess(guess);
+populate();
+}
+};
+
+function showProgress() {
+var currentQuestionNumber = quiz.questionIndex + 1;
+var element = document.getElementById("progress");
+element.innerHTML = "Question " + currentQuestionNumber + " of " + quiz.questions.length;
+};
+
+function showScores() {
+var gameOverHTML = "<h1>Result</h1>";
+gameOverHTML += "<h2 id='score'> Your scores: " + quiz.score + "</h2>";
+var element = document.getElementById("quiz");
+element.innerHTML = gameOverHTML;
+};
+
+// create questions
+var questions_set1 = [
+new Question("Which one is A?", ["A","V","C","E"], "A"),
+new Question("Which one is M?", ["D","N","M","Q"], "M"),
+new Question("Which one is P?", ["D","B","Q","P"], "P"),
+new Question("Which one is D?", ["A","D","P","B"], "D"),
+new Question("Which one is K?", ["X","W","K","V"], "K")
+];
+
+var questions_set2 = [
+new Question("Guess sign for B", ["D","A","B","R"], "B"),
+new Question("Guess sign for F", ["F","Q","R","S"], "F"),
+new Question("Guess sign for I", ["H","K","L","I"], "I"),
+new Question("Guess sign for O", ["A","O","P","R"], "O"),
+new Question("Guess sign for T", ["T","N","F","G"], "T")
+];
+
+var questions_set3 = [
+new Question("Which one is E?", ["F","J","G","E"], "E"),
+new Question("Which one is J?", ["A","J","I","M"], "J"),
+new Question("Which one is L?", ["L","G","D","E"], "L"),
+new Question("Which one is R?", ["P","R","Q","S"], "R"),
+new Question("Which one is U?", ["A","V","U","W"], "U")
+];
+
+var questions_set4 = [
+new Question("Which one is C?", ["F","C","X","Z"], "C"),
+new Question("Which one is G?", ["C","R","G","S"], "G"),
+new Question("Which one is H?", ["H","I","J","B"], "H"),
+new Question("Which one is V?", ["V","U","W","Y"], "V"),
+new Question("Which one is Z?", ["S","Z","U","Y"], "Z")
+];
+
+var questions_set5 = [
+new Question("Guess sign for N", ["M","W","H","N"], "N"),
+new Question("Guess sign for S", ["A","I","Z","S"], "S"),
+new Question("Guess sign for W", ["U","W","V","Y"], "W"),
+new Question("Guess sign for Y", ["W","V","Y","U"], "Y"),
+new Question("Guess sign for X", ["X","A","Q","N"], "X")
+];
+
+function Question(text, choices, answer) {
+this.text = text;
+this.choices = choices;
+this.answer = answer;
+}
+
+Question.prototype.isCorrectAnswer = function(choice) {
+return this.answer === choice;
+}
+
+
+function Quiz(questions) {
+this.score = 0;
+this.questions = questions;
+this.questionIndex = 0;
+}
+
+Quiz.prototype.getQuestionIndex = function() {
+return this.questions[this.questionIndex];
+}
+
+Quiz.prototype.guess = function(answer) {
+if (this.getQuestionIndex().isCorrectAnswer(answer)) {
+this.score++;
+}
+
+this.questionIndex++;
+}
+
+Quiz.prototype.isEnded = function() {
+return this.questionIndex === this.questions.length;
+}
+
+// create quiz
+var randomnumber = Math.floor(Math.random() * (5 - 1 + 1)) + 1;
+if(randomnumber==1)
+var quiz = new Quiz(questions_set1);
+
+if(randomnumber==2)
+var quiz = new Quiz(questions_set2);
+
+if(randomnumber==3)
+var quiz = new Quiz(questions_set3);
+
+if(randomnumber==4)
+var quiz = new Quiz(questions_set4);
+
+if(randomnumber==5)
+var quiz = new Quiz(questions_set5);
+
+
+// display quiz
+populate();
+</script>
+
+</body>
+</html>
+
+
+{% endblock %}

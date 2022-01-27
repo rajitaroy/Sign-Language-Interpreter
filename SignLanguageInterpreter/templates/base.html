@@ -1,0 +1,437 @@
+{% load static %}
+
+<!DOCTYPE html>
+<html>
+
+<head>
+  <script src="{% static 'https://kit.fontawesome.com/a076d05399.js' %}"></script>
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+
+  <style>
+    @import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@200;300&display=swap');
+
+    #videoPlayer{
+      margin-top: 30px;
+    }
+
+    /* navbar styling */
+    .navbar {
+      position: flex;
+      width: 100%;
+      z-index: 999;
+      padding: 20px 10px;
+      font-family: 'Montserrat', sans-serif;
+      transition: all 0.3s ease;
+      margin-top: 0;
+
+    }
+
+
+    .navbar.sticky {
+      padding: 15px 0;
+      background: crimson;
+    }
+
+    .navbar .max-width {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+
+    .navbar .logo a {
+      color: #fff;
+      font-size: 20px;
+
+    }
+
+    .navbar .logo a span {
+      color: crimson;
+      transition: all 0.3s ease;
+    }
+
+    .navbar.sticky .logo a span {
+      color: #fff;
+    }
+
+    li a:hover {
+      background-color: crimson;
+      border-radius: 5px;
+      transition: 0.3s;
+    }
+
+    .navbar.sticky .menu li a:hover {
+      color: #fff;
+    }
+
+    /*menu btn styling */
+    .menu-btn {
+      color: #fff;
+      font-size: 10px;
+      cursor: pointer;
+      display: none;
+
+    }
+
+    .center {
+      display: block;
+      margin-left: auto;
+      margin-right: auto;
+      width: 50%;
+    }
+
+    .li {
+      float: left;
+      padding-inline-end: 15px;
+
+
+    }
+
+    .li a {
+
+      padding: 14px 16px;
+      text-decoration: none;
+    }
+
+    .form-style p {
+      font-family: 'Montserrat', sans-serif;
+      font-weight: bold;
+      color: crimson;
+      margin-top: 30px;
+      font-size: 65px;
+      align-items: center;
+    }
+
+    .form-style button {
+
+      width: 150px;
+      height: 60px;
+      padding: 5%;
+      background: crimson;
+      border-radius: 5px;
+      border-color: crimson;
+      /* border-bottom: 2px solid #393f4d;; */
+      /* border-top-style: none;
+	border-right-style: none;
+	border-left-style: none; */
+
+      color: white;
+      margin-top: 20px;
+      font-size: 15px;
+      font-weight: bold;
+      font-family: 'Montserrat', sans-serif;
+    }
+
+    .form-style button:hover {
+      color: crimson;
+      background: rgb(20, 20, 20);
+      border-color: crimson;
+      transition: 00.3s;
+    }
+
+    .split {
+      height: 100%;
+      width: 50%;
+      position: fixed;
+      z-index: 1;
+      top: 50;
+      overflow-x: hidden;
+      padding-top: 20px;
+      color: white;
+      font-family: 'Montserrat', sans-serif;
+      font-weight: 50px;
+    }
+
+    .left {
+      left: 15;
+      border-right: 0px #feda6a solid;
+    }
+
+    .right {
+      right: 0;
+      border-left: 1px #feda6a solid;
+    }
+
+    .mytext {
+      border: 1px solid #393f4d;
+      border-right: none;
+      padding: 4px;
+      margin: 0px;
+      float: left;
+      height: 32px;
+      overflow: hidden;
+      line-height: 16px;
+      width: 300px;
+      margin-left: 54px;
+    }
+
+    .mic {
+      border: #393f4d;
+      background: crimson;
+      vertical-align: top;
+      padding: 0px;
+      margin: 0;
+      float: left;
+      height: 42px;
+      overflow: hidden;
+      width: 5em;
+      text-align: center;
+      line-height: 16px;
+    }
+
+
+    .submit {
+      border: 1px solid #393f4d;
+      height: 42px;
+      width: 160px;
+      text-align: center;
+      background-color: crimson;
+      color: white;
+      border-radius: 5px;
+      font-size: 24px;
+      font-family: 'Montserrat', sans-serif;
+      vertical-align: top;
+    }
+
+    .submit:hover {
+      color: crimson;
+      background: none;
+      border-color: crimson;
+      transition: 00.3s;
+      background: rgb(230, 189, 189);
+    }
+
+    .td {
+      color: white;
+
+      font-size: 20px;
+    }
+
+    body {
+      background-image: url("{% static 'pic2.jpg' %}");
+      background-color: black;
+    }
+
+    /* .transbox {
+  margin: 30px;
+  background-color: #ffffff;
+  border: 1px solid black;
+  opacity: 0.6;
+} */
+
+    .form-style {
+      font: 95% Arial, Helvetica, sans-serif;
+      max-width: 400px;
+      margin: 10px auto;
+      padding: 16px;
+
+    }
+
+    .form-style h1,
+    .form-style a {
+      padding: 20px 0;
+      font-size: 24px;
+
+      font-family: 'Montserrat', sans-serif;
+      text-align: center;
+      margin: -16px -16px 16px -16px;
+      color: #feda6a
+    }
+
+
+    .site-form span,
+    label {
+      color: #feda6a;
+    }
+
+    .errorlist {
+      color: red;
+
+    }
+
+    /* Dropdown style */
+    .dropbtn {
+      /* background-color: crimson; */
+      text-decoration: none;
+      color: white;
+      padding: 16px;
+      font-size: 16px;
+      border: none;
+      cursor: pointer;
+    }
+
+    .dropdown {
+      position: relative;
+      display: inline-block;
+      z-index: 10;
+    }
+
+    .dropdown-content {
+      display: none;
+      position: absolute;
+      right: 0;
+      background-color: #f9f9f9;
+      min-width: 160px;
+      box-shadow: 0px 8px 16px 0px rgba(0, 0, 0, 0.2);
+      z-index: 1;
+    }
+
+    .dropdown-content a {
+      color: black;
+      padding: 12px 16px;
+      text-decoration: none;
+      display: block;
+    }
+
+    .dropdown-content a:hover {
+      background-color: crimson;
+    }
+
+    .dropdown:hover .dropdown-content {
+      display: block;
+      background-color: transparent;
+      border-radius: 5px;
+      transition: 0.3s;
+    }
+
+    .dropdown:hover .dropbtn {
+      /* background-color: #3e8e41; */
+      background-color: crimson;
+      border-radius: 5px;
+      transition: 0.3s;
+    }
+
+    /* learn.html */
+    .vid {
+      width: 450px;
+      height: 300px;
+      margin: 10px;
+      transition: all 1s;
+    }
+
+    .vid:hover {
+      transform: scale(1.1);
+    }
+
+    .letter_button {
+      border: none;
+      color: white;
+      padding: 15px 32px;
+      text-align: center;
+      text-decoration: none;
+      display: inline-block;
+      font-size: 16px;
+      margin: 4px 2px;
+      cursor: pointer;
+      background-color: crimson;
+    }
+
+
+    .overlay {
+      position: absolute;
+      top: 0;
+      bottom: 0;
+      left: 0;
+      right: 0;
+      background: rgba(0, 0, 0, 0.7);
+      transition: opacity 500ms;
+      visibility: hidden;
+      opacity: 0;
+      }
+      .overlay:target {
+      visibility: visible;
+      opacity: 1;
+      }
+      
+      .popup {
+      margin: 70px auto;
+      padding: 20px;
+      background: rgb(255, 255, 255);
+      border-radius: 5px;
+      width: 35%;
+      position: relative;
+      transition: all 5s ease-in-out;
+      }
+      
+      .popup h1 {
+      margin-top: 0;
+      color: crimson;
+      font-family: Tahoma, Arial, sans-serif;
+      }
+      .popup .close {
+      position: absolute;
+      top: 20px;
+      right: 30px;
+      transition: all 200ms;
+      font-size: 30px;
+      font-weight: bold;
+      text-decoration: none;
+      color: #333;
+      }
+      .popup .close:hover {
+      color: rgb(0, 0, 0);
+      }
+      .popup .content {
+      max-height: 30%;
+      overflow: auto;
+      }
+    
+  </style>
+  <title>Homepage</title>
+</head>
+<!-- <div style="background-color:#404040;color:#feda6a;padding:10 10 1 10;border: 1px #feda6a groove;margin-bottom:0;">
+
+<h1 align=center>Audio To Sign Language Tool</h1>
+</div> -->
+<br>
+
+<body>
+  <nav class="navbar">
+    <div class="max-width">
+      <div class="logo">
+        <ul class="menu" style="list-style-type:none;">
+          <li class="li"><a class="active" href="{% url 'home' %}">Home</a></li>
+          <!-- <li class="li"><a class="active" href="{% url 'animation' %}">Converter</a></li> -->
+          <li class="li dropdown">
+            <a class="active dropbtn">
+              <!-- <div class="dropdown"> -->
+              <!-- <button class="active dropbtn">Converter</button> -->
+              Converter
+            </a>
+            <div class="dropdown-content" style="left: -1; padding-top: 12px;">
+              <a href="{% url 'animation' %}">Text to Sign</a>
+              <a href="{% url 'text' %}">Sign to Text</a>
+            </div>
+            <!-- </div> -->
+
+          </li>
+
+          <li class="li"><a href="{% url 'learn' %}">Learn</a></li>
+          <li class="li"><a href="{% url 'quiz' %}">Quiz</a></li>
+
+
+        </ul>
+        <div class="menu-btn">
+          <i class="fas fa-bars"></i>
+        </div>
+      </div>
+  </nav>
+
+  <div class="wrapper">
+    {% block content %}
+    {% endblock %}
+  </div>
+
+
+</body>
+
+</html>
+
+
+<!-- <div class="dropdown" style="float:left;">
+  <button class="dropbtn">Left</button>
+  <div class="dropdown-content" style="left:0;">
+    <a href="#">Link 1</a>
+    <a href="#">Link 2</a>
+    <a href="#">Link 3</a>
+  </div>
+</div> -->

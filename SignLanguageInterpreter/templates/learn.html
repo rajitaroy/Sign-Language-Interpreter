@@ -1,0 +1,112 @@
+{% extends 'base.html' %}
+{% load static %}
+
+
+{% block content %}
+
+<h2 style="text-align:center;color:white">Alphabets</h2><br>
+<a href = "#popup1"><button class="letter_button" id="A">A</button></a>
+<a href = "#popup1"><button class="letter_button" id="B">B</button></a>
+<a href = "#popup1"><button class="letter_button" id="C">C</button></a>
+<a href = "#popup1"><button class="letter_button" id="D">D</button></a>
+<a href = "#popup1"><button class="letter_button" id="E">E</button></a>
+<a href = "#popup1"><button class="letter_button" id="F">F</button></a>
+<a href = "#popup1"><button class="letter_button" id="G">G</button></a>
+<a href = "#popup1"><button class="letter_button" id="H">H</button></a>
+<a href = "#popup1"><button class="letter_button" id="I">I</button></a>
+<a href = "#popup1"><button class="letter_button" id="J">J</button></a>
+<a href = "#popup1"><button class="letter_button" id="K">K</button></a>
+<a href = "#popup1"><button class="letter_button" id="L">L</button></a>
+<a href = "#popup1"><button class="letter_button" id="M">M</button></a>
+<a href = "#popup1"><button class="letter_button" id="N">N</button></a>
+<a href = "#popup1"><button class="letter_button" id="O">O</button></a>
+<a href = "#popup1"><button class="letter_button" id="P">P</button></a>
+<a href = "#popup1"><button class="letter_button" id="Q">Q</button></a>
+<a href = "#popup1"><button class="letter_button" id="R">R</button></a>
+<a href = "#popup1"><button class="letter_button" id="S">S</button></a>
+<a href = "#popup1"><button class="letter_button" id="T">T</button></a>
+<a href = "#popup1"><button class="letter_button" id="U">U</button></a>
+<a href = "#popup1"><button class="letter_button" id="V">V</button></a>
+<a href = "#popup1"><button class="letter_button" id="W">W</button></a>
+<a href = "#popup1"><button class="letter_button" id="X">X</button></a>
+<a href = "#popup1"><button class="letter_button" id="Y">Y</button></a>
+<a href = "#popup1"><button class="letter_button" id="Z">Z</button></a>
+<br><br>
+<h2 style="text-align:center;color:white">Numbers</h2><br>
+<a href = "#popup1"><button class="letter_button" id="0">0</button></a>
+<a href = "#popup1"><button class="letter_button" id="1">1</button></a>
+<a href = "#popup1"><button class="letter_button" id="2">2</button></a>
+<a href = "#popup1"><button class="letter_button" id="3">3</button></a>
+<a href = "#popup1"><button class="letter_button" id="4">4</button></a>
+<a href = "#popup1"><button class="letter_button" id="5">5</button></a>
+<a href = "#popup1"><button class="letter_button" id="6">6</button></a>
+<a href = "#popup1"><button class="letter_button" id="7">7</button></a>
+<a href = "#popup1"><button class="letter_button" id="8">8</button></a>
+<a href = "#popup1"><button class="letter_button" id="9">9</button></a>
+
+<div id="popup1" class="overlay">
+    <div class="popup">
+     <h1 id="letter"></h1>
+      <a class="close" href="#">×</a>
+        <video class="vid" id="videoPlayer" 
+        onmouseenter="VideoController(true,this)" onmouseleave="VideoController(true, this)" loop>
+            <source  id="video_source" src="/static/B.mp4" type="video/mp4" />
+            Your browser does not support HTML5 video.
+        </video>
+    </div>
+  </div>
+  <script>
+    const VideoController = function(isHovering, videoElement)
+    {
+	if (isHovering == true)
+    {
+        
+        videoElement.play();
+    }
+    }
+
+</script>
+
+<script>
+    $(document).ready(function () {
+        $("button").click(function() {
+            console.log(this.id);
+            var id = this.id;
+            $('#letter').text(id);
+            var src = "/static/"+id+".mp4";
+            console.log(src);
+            var video = document.getElementById('videoPlayer');
+            video.src = src;
+            video.play();
+        });
+    });
+</script>
+<!--<div class="container" style="display: flex; flex-wrap: wrap; justify-content: center;">
+    {% for letter in letters %}
+    <div id="videoNo">
+        <video class="vid" id="videoPlayer" 
+        onmouseenter="VideoController(true,this)" onmouseleave="VideoController(false, this)" loop>
+            <source  src="/static/{{ letter }}.mp4" type="video/mp4">
+            Your browser does not support HTML5 video.
+        </video>
+        <div id="num" style="text-align:center; font-size: larger; color: white;">{{ letter }}</div>
+    </div>
+    {% endfor %}
+</div>
+
+<script>
+    const VideoController = function(isHovering, videoElement)
+    {
+	if (isHovering == true)
+    {
+        
+        videoElement.play();
+    }
+    else if (isHovering == false)
+    {
+        videoElement.pause();
+    }
+    }
+</script>-->
+
+{% endblock %}

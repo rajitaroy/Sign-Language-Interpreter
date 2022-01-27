@@ -1,0 +1,158 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block content %}
+
+<!DOCTYPE html>
+<html>
+<head>
+  <script src="{% static 'https://kit.fontawesome.com/a076d05399.js' %}"></script>
+
+
+<style>
+     @import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@200;300&display=swap');
+     @import url('https://fonts.googleapis.com/css2?family=Anton&display=swap');
+     body {
+  font-family: Arial, Helvetica, sans-serif;
+  margin: 0;
+}
+
+html {
+  box-sizing: border-box;
+}
+
+*, *:before, *:after {
+  box-sizing: inherit;
+}
+
+.column {
+  float: left;
+  width: 25%;
+  margin-bottom: 16px;
+  padding: 0 8px;
+}
+
+.card {
+  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
+  margin: 8px;
+  color: white;
+  
+}
+
+.about-section {
+  padding: 50px;
+  text-align: center;
+  background-color: black;
+  color: white;
+  font-family: 'Anton','sans-serif';
+}
+
+.container {
+  padding: 0 16px;
+}
+
+.container::after, .row::after {
+  content: "";
+  clear: both;
+  display: table;
+}
+
+.title {
+  color: grey;
+}
+
+.button {
+  border: none;
+  outline: 0;
+  display: inline-block;
+  padding: 8px;
+  color: white;
+  background-color: #000;
+  text-align: center;
+  cursor: pointer;
+  width: 100%;
+}
+
+.button a{
+    
+  border: none;
+  outline: 0;
+  display: inline-block;
+  padding: 8px;
+  color: white;
+  background-color: #000;
+  text-align: center;
+  cursor: pointer;
+  width: 100%;
+
+}
+
+
+
+@media screen and (max-width: 650px) {
+  .column {
+    width: 100%;
+    display: block;
+  }
+}
+
+</style>
+</head>
+<body>
+    
+    <div class="about-section">
+        <h1>Know more about us!</h1>
+        <p>We are a bunch of people aiming to ease communication between everyone! </p>
+        <p>Know our team below!</p>
+      </div>
+      
+      <h2 style="text-align:center;color:white">Our Team</h2>
+      <div class="row">
+        <div class="column">
+          <div class="card">
+            <img src="{% static 'rajita.jpeg' %}" alt="Rajita" style="width:100%">
+            <div class="container">
+              <h2>Rajita Roy</h2>
+              
+              <p><button class="button"><a href="mailto:rajita.roy@indiraicem.ac.in">Contact</a></button></p>
+            </div>
+          </div>
+        </div>
+      
+        <div class="column">
+          <div class="card">
+            <img src="{% static 'bhavesh.jpg' %}" alt="Bhavesh" style="width:100%">
+            <div class="container">
+              <h2>Bhavesh Sharma</h2>
+
+              <p><button class="button"><a href="mailto:bhavesh.sharma@indiraicem.ac.in">Contact</a></button></p>
+            </div>
+          </div>
+        </div>
+
+        <div class="column">
+            <div class="card">
+              <img src="{% static 'nixon.jpeg' %}" alt="Nixon" style="width:100%">
+              <div class="container">
+                <h2>Nixon Kurian</h2>
+  
+                <p><button class="button"><a href="mailto:nixon.kurian@indiraicem.ac.in">Contact</a></button></p>
+              </div>
+            </div>
+          </div>
+        
+        <div class="column">
+          <div class="card">
+            <img src="{% static 'ankit.jpg' %}" alt="Ankit" style="width:100%">
+            <div class="container">
+              <h2>Ankit Sharma</h2>
+              <p><button class="button"><a href="mailto:ankit.sharma@indiraicem.ac.in">Contact</a></button></p>
+              
+            </div>
+          </div>
+        </div>
+      </div>
+      
+      
+</body>
+
+{% endblock %}
