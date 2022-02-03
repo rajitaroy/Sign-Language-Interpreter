@@ -4,4 +4,4 @@ Sign Language Interpreter is an application to help ease communication between t
 To run:  
 Double click on `execute.bat` inside the folder.  
 
-The project has been led by @rajitaroy , @Bhavesharma11 , @Scarface69420 , @Ayaan57  
+The project has been led by [rajitaroy](https://github.com/rajitaroy) , [Bhavesharma11](https://github.com/Bhavesharma11) , [Scarface69420](https://github.com/Scarface69420) , [Ayaan57](https://github.com/Ayaan57)  
